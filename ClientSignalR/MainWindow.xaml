@@ -1,0 +1,74 @@
+﻿<Window x:Class="ClientSignalR.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientSignalR"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="MainWindow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        
+        <ComboBox x:Name="Protocol" Grid.Column="0" Grid.Row="1">
+            <ComboBoxItem IsSelected="True" Content="http://"/>
+            <ComboBoxItem Content="https://"/>
+        </ComboBox>
+        
+        <TextBox x:Name="Ip" Grid.Column="1" Grid.Row="1"/>
+        <xctk:IntegerUpDown x:Name="Port" Grid.Column="2" Grid.Row="1" Text="5009"/>
+        <TextBox x:Name="Address" Grid.Column="3" Grid.Row="1"/>
+        <TextBox x:Name="Message" Grid.Column="4" Grid.Row="1"/>
+        <xctk:IntegerUpDown x:Name="NumberParametersMessage" Grid.Column="5" Grid.Row="1" Text="1" Minimum="1"/>
+        
+        <TextBlock x:Name="Url" Grid.Column="0" Grid.Row="0" Text="http://:/"/>
+        
+        <Button x:Name="AddUrl" Grid.Column="0" Grid.Row="3" Content="Добавить URL"/>
+        <Button x:Name="AddMessage" Grid.Column="1" Grid.Row="3" Content="Добавить сообщение"/>
+        <Button x:Name="Connect" Grid.Column="2" Grid.Row="3" Content="Подключиться"/>
+        <Button x:Name="Disconnect" Grid.Column="3" Grid.Row="3" Content="Отключиться"/>
+        
+        <ScrollViewer x:Name="ScrollResult" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="7" >
+            <TextBlock x:Name="ResultOutput" TextWrapping="Wrap"/>
+        </ScrollViewer>
+        
+        <ListBox x:Name="ListUrls" Grid.Column="6" Grid.Row="0" Grid.RowSpan="4" SelectionMode="Single" 
+                 ItemsSource="{Binding Connections}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="local:Connection">
+                    <StackPanel>
+                        <TextBlock FontSize="16" Text="{Binding Path=Url}"/>
+                        <TextBlock FontSize="16" Text="{Binding Path=NumConnection}"/>
+                        <ListBox x:Name="ListMessage" IsEnabled="False" 
+                                 ItemsSource="{Binding Messages}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="local:Message">
+                                    <StackPanel>
+                                        <TextBlock FontSize="16" Text="{Binding Path=Text}"/>
+                                        <TextBlock FontSize="16" Text="{Binding Path=NumberParameters}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

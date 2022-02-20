@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR-Server", "SignalR-Server\SignalR-Server.csproj", "{04BB988E-5B90-4159-AC61-EA6BC4D58958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSignalR", "ClientSignalR\ClientSignalR.csproj", "{1CD69595-2CAE-44D4-B185-43DA8188068E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04BB988E-5B90-4159-AC61-EA6BC4D58958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BB988E-5B90-4159-AC61-EA6BC4D58958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BB988E-5B90-4159-AC61-EA6BC4D58958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BB988E-5B90-4159-AC61-EA6BC4D58958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD69595-2CAE-44D4-B185-43DA8188068E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD69595-2CAE-44D4-B185-43DA8188068E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD69595-2CAE-44D4-B185-43DA8188068E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD69595-2CAE-44D4-B185-43DA8188068E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
