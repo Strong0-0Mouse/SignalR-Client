@@ -40,12 +40,13 @@
         <TextBlock x:Name="Url" Grid.Column="0" Grid.Row="0" Text="http://:/"/>
         
         <Button x:Name="AddUrl" Grid.Column="0" Grid.Row="3" Content="Добавить URL"/>
-        <Button x:Name="AddMessage" Grid.Column="1" Grid.Row="3" Content="Добавить сообщение"/>
-        <Button x:Name="Connect" Grid.Column="2" Grid.Row="3" Content="Подключиться"/>
-        <Button x:Name="Disconnect" Grid.Column="3" Grid.Row="3" Content="Отключиться"/>
+        <Button x:Name="DeleteUrl" Grid.Column="1" Grid.Row="3" Content="Удалить URL"/>
+        <Button x:Name="AddMessage" Grid.Column="2" Grid.Row="3" Content="Добавить сообщение"/>
+        <Button x:Name="Connect" Grid.Column="3" Grid.Row="3" Content="Подключиться"/>
+        <Button x:Name="Disconnect" Grid.Column="4" Grid.Row="3" Content="Отключиться"/>
         
         <ScrollViewer x:Name="ScrollResult" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="7" >
-            <TextBlock x:Name="ResultOutput" TextWrapping="Wrap"/>
+            <TextBox x:Name="ResultOutput" IsReadOnly="True"/>
         </ScrollViewer>
         
         <ListBox x:Name="ListUrls" Grid.Column="6" Grid.Row="0" Grid.RowSpan="4" SelectionMode="Single" 
@@ -54,7 +55,7 @@
                 <DataTemplate DataType="local:Connection">
                     <StackPanel>
                         <TextBlock FontSize="16" Text="{Binding Path=Url}"/>
-                        <TextBlock FontSize="16" Text="{Binding Path=NumConnection}"/>
+                        <TextBlock FontSize="16" Text="{Binding Path=Id}"/>
                         <ListBox x:Name="ListMessage" IsEnabled="False" 
                                  ItemsSource="{Binding Messages}">
                             <ListBox.ItemTemplate>

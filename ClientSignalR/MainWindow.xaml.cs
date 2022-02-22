@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -27,11 +28,29 @@ namespace ClientSignalR
             Address.TextChanged += ChangeUrl;
             
             AddUrl.Click += AddUrlOnClick;
+            DeleteUrl.Click += DeleteUrlOnClick;
             AddMessage.Click += AddMessageOnClick;
             Connect.Click += ConnectEvent;
             Disconnect.Click += DisconnectEvent;
             
             ListUrls.SelectionChanged += ListUrlsOnSelectionChanged;
+            
+            if (LogicSignalR.NumberConnection == 0)
+                DeleteUrl.IsEnabled = false;
+        }
+
+        private void DeleteUrlOnClick(object sender, RoutedEventArgs e)
+        {
+            if (LogicSignalR.NumberConnection == 0)
+                DeleteUrl.IsEnabled = false;
+            try
+            {
+                Logic.Connections.Remove((ListUrls.SelectedItem as Connection)!);
+            }
+            catch
+            {
+                LogicSignalR.NumberConnection--;
+            }
         }
 
         private void NumberChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -80,7 +99,8 @@ namespace ClientSignalR
 
         private void ListUrlsOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LogicSignalR.CurrentConnection = (e.AddedItems[0] as Connection)!.NumConnection;
+            var index = Logic.Connections.IndexOf(Logic.Connections.Single(c => c.Id == (e.AddedItems[0] as Connection)!.Id));
+            LogicSignalR.CurrentConnection = index;
         }
 
         private void AddMessageOnClick(object sender, RoutedEventArgs e)
@@ -102,7 +122,7 @@ namespace ClientSignalR
                         {
                             ResultOutput.Text +=
                                 $"{DateTime.Now.TimeOfDay}: [{Logic.Connections[LogicSignalR.CurrentConnection].Url}:" +
-                                $" {Logic.Connections[LogicSignalR.CurrentConnection].NumConnection}]" +
+                                $" {Logic.Connections[LogicSignalR.CurrentConnection].Id}]" +
                                 $" >> {item}\n";
                         }
                         return null;
@@ -116,15 +136,17 @@ namespace ClientSignalR
 
         private void AddUrlOnClick(object sender, RoutedEventArgs e)
         {
+            DeleteUrl.IsEnabled = true;
             try
             {
                 Logic.Connections.Add(new Connection
                 {
-                    NumConnection = LogicSignalR.NumberConnection,
+                    Id = LogicSignalR.NumberLastConnection,
                     Url = Url.Text,
                     HubConnection = new HubConnectionBuilder().WithUrl(Url.Text).Build(),
                     Messages = new ObservableCollection<Message>()
                 });
+                LogicSignalR.NumberLastConnection++;
                 LogicSignalR.NumberConnection++;
             }
             catch (Exception exception)

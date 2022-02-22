@@ -10,6 +10,7 @@ namespace ClientSignalR
         private ObservableCollection<Connection> _connections = new();
         
         public static int NumberConnection { get; set; }
+        public static int NumberLastConnection { get; set; }
         public static int CurrentConnection { get; set; }
         public static bool IsConnectOpened { get; set; }
         

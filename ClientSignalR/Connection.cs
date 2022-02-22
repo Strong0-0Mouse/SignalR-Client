@@ -11,7 +11,7 @@ namespace ClientSignalR
         private ObservableCollection<Message> _messages = new();
         
         public event PropertyChangedEventHandler? PropertyChanged;
-        public int NumConnection { get; set; }
+        public int Id { get; set; }
         public string Url { get; set; } = string.Empty;
         public HubConnection? HubConnection { get; set; }
         public ObservableCollection<Message> Messages
